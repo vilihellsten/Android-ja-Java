@@ -6,7 +6,9 @@
     <string name="second_fragment_label">Second Fragment</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
-    <string name="hello">HelloWorld</string>
+    <string name="helloWorld">HelloWorld</string>
+    <string name="startgame">Start Game</string>
+    <string name="hello">Hello</string>
 
 
 
