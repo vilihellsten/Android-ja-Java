@@ -11,6 +11,11 @@
         <item name="colorOnSecondary">@color/md_theme_light_onSecondary</item>
         <item name="colorSecondaryContainer">@color/md_theme_light_secondaryContainer</item>
 
+        //Toolbar nuolen ja tekstin värit valkoiseksi
+        <item name="android:textColorPrimary">@android:color/white</item>
+        <item name="android:textColorSecondary">@android:color/white</item>
+        <item name="actionMenuTextColor">@android:color/white</item>
+
     </style>
 
     <style name="Theme.Javakurssi" parent="Base.Theme.Javakurssi" />

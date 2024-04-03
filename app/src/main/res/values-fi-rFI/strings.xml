@@ -11,4 +11,11 @@
     <string name="helloWorld">HeiMaailma</string>
     <string name="startgame">Aloita peli</string>
     <string name="hello">Hei</string>
+    <string name="demoView">PeliDemo</string>
+    <string name="textView2">Arvauksia 0 kpl</string>
+    <string name="locationInfo">Sijaintitietosi</string>
+    <string name="longitude">Longitude</string>
+    <string name="latitude">Latitude</string>
+    <string name="address">Osoite</string>
+    <string name="show">Näytä kartalla</string>
 </resources>

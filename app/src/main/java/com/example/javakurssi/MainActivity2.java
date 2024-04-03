@@ -1,5 +1,6 @@
 package com.example.javakurssi;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -30,8 +31,10 @@ public class MainActivity2 extends AppCompatActivity {
             return insets;
         });
 
+
         helloView = (TextView) findViewById(R.id.helloView);
         helloButton = (Button) findViewById(R.id.helloButton);
+
         helloButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 handleOnClickEvents(v);
@@ -61,7 +64,7 @@ public class MainActivity2 extends AppCompatActivity {
                 break;
             case R.id.startButton:
                 Log.d(TAG, "User tapped the Start Game button");
-
+                startActivity(new Intent(MainActivity2.this, GameActivity.class));
                 break;
         }
     }

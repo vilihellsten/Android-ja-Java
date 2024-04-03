@@ -9,18 +9,13 @@
     <string name="helloWorld">HelloWorld</string>
     <string name="startgame">Start Game</string>
     <string name="hello">Hello</string>
-
-
-
-
-
-
-
-
-
-
-
-
+    <string name="demoView">GameDemo</string>
+    <string name="textView2">Guesses</string>
+    <string name="locationInfo">Your location information</string>
+    <string name="longitude">Longitude</string>
+    <string name="latitude">Latitude</string>
+    <string name="address">Address</string>
+    <string name="show">Show in map</string>
 
     <string name="lorem_ipsum">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris
@@ -58,4 +53,8 @@
         libero vel nunc consequat, quis tincidunt nisl eleifend. Cras bibendum enim a justo luctus
         vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
+    <string name="title_activity_bottom">BottomActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
 </resources>
