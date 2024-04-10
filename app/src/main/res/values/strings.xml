@@ -16,6 +16,12 @@
     <string name="latitude">Latitude</string>
     <string name="address">Address</string>
     <string name="show">Show in map</string>
+    <string name="apmon">Airplanemode ON</string>
+    <string name="apmoff">Airplanemode OFF</string>
+    <string name="timer">Timer</string>
+    <string name="start">Start</string>
+    <string name="pause">Pause</string>
+    <string name="stop">Stop</string>
 
     <string name="lorem_ipsum">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris

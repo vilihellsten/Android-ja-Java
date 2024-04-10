@@ -62,7 +62,6 @@ public class DashboardFragment extends Fragment implements LocationListener {
             //                                          int[] grantResults)
             // to handle the case where the user grants the permission. See the documentation
             // for ActivityCompat#requestPermissions for more details.
-            Log.d("TESTIKOHTA","asdfasdfasdf");
             return root;
         }
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 10000, 0, this);

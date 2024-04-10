@@ -1,5 +1,7 @@
 package com.example.javakurssi;
 
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,6 +16,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class MainActivity3 extends AppCompatActivity {
 
     private ActivityBottomBinding binding;
+
+    private AirplanemodeReceiver apmBr;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +43,21 @@ public class MainActivity3 extends AppCompatActivity {
         //NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration); tämä rikkoo
 
         NavigationUI.setupWithNavController(binding.navView, navController);
+        apmBr = new AirplanemodeReceiver();
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        //registerReceiver(BroadcastReceiver, IntentFilter)
+        IntentFilter intentFilter = new IntentFilter(Intent.ACTION_AIRPLANE_MODE_CHANGED);
+        this.registerReceiver(apmBr, intentFilter);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        this.unregisterReceiver(apmBr);
+
+    }
 }

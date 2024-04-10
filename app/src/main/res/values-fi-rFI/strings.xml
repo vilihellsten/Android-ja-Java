@@ -18,4 +18,10 @@
     <string name="latitude">Latitude</string>
     <string name="address">Osoite</string>
     <string name="show">Näytä kartalla</string>
+    <string name="apmon">Lentokonetila ON</string>
+    <string name="apmoff">Lentokonetila OFF</string>
+    <string name="timer">Ajastin</string>
+    <string name="start">Aloita</string>
+    <string name="pause">Tauko</string>
+    <string name="stop">Pysäytä</string>
 </resources>
