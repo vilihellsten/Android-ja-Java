@@ -22,6 +22,12 @@
     <string name="start">Start</string>
     <string name="pause">Pause</string>
     <string name="stop">Stop</string>
+    <string name="search">Search</string>
+    <string name="companySearch">Search company by name</string>
+    <string name="BusinessId">BusinessId</string>
+    <string name="Companyform">Companyform</string>
+    <string name="Registrationdate">Registration date</string>
+
 
     <string name="lorem_ipsum">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris

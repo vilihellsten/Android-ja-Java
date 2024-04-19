@@ -24,4 +24,9 @@
     <string name="start">Aloita</string>
     <string name="pause">Tauko</string>
     <string name="stop">Pysäytä</string>
+    <string name="search">Etsi</string>
+    <string name="companySearch">Etsi yritystä nimellä</string>
+    <string name="BusinessId">Yritystunnus</string>
+    <string name="Companyform">Yritysmuoto</string>
+    <string name="Registrationdate">Rekisteröinti pvm</string>
 </resources>

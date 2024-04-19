@@ -7,12 +7,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.javakurssi.DataActivity;
 import com.example.javakurssi.GameActivity;
 import com.example.javakurssi.R;
 import com.example.javakurssi.databinding.FragmentHomeBinding;
@@ -25,6 +27,9 @@ public class HomeFragment extends Fragment {
     private Button startButton;
     private TextView helloView;
 
+    private EditText search;
+
+    private Button searchButton;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         HomeViewModel homeViewModel =
@@ -52,6 +57,14 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        searchButton = (Button) root.findViewById(R.id.searchButton);
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                handleOnClickEvents(v);
+            }
+        });
+
+        search = (EditText) root.findViewById(R.id.search);
         return root;
     }
 
@@ -67,7 +80,7 @@ public class HomeFragment extends Fragment {
             case R.id.helloButton:
                 Log.d(TAG, "User tapped the Hello button");
                 if(helloView.getVisibility() == View.GONE )
-                { //pitää ehkä korjata... ei ole constraintteja helloViewvissä joten muut elementit eivät liiku, gone toimii
+                {
                     helloView.setVisibility(View.VISIBLE);
                 } else {
                     helloView.setVisibility(View.GONE);
@@ -76,6 +89,14 @@ public class HomeFragment extends Fragment {
             case R.id.startButton:
                 Log.d(TAG, "User tapped the Start Game button");
                 startActivity(new Intent(getActivity(), GameActivity.class));
+                break;
+            case R.id.searchButton:
+                Log.d(TAG, "User tapped the search button");
+                Intent i = new Intent(getActivity(), DataActivity.class);
+                String value = search.getText().toString();
+                Log.e("search",value);
+                i.putExtra("search", value);
+                startActivity(i);
                 break;
         }
     }

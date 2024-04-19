@@ -19,6 +19,8 @@ public class MainActivity2 extends AppCompatActivity {
     private Button helloButton;
     private Button startButton;
     private TextView helloView;
+
+    private Button searchButton;
     @Override
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +49,7 @@ public class MainActivity2 extends AppCompatActivity {
                 handleOnClickEvents(v);
             }
         });
+
 
     }
 

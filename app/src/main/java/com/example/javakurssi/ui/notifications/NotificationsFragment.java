@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.NumberPicker;
-import android.widget.TextClock;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -27,18 +26,15 @@ public class NotificationsFragment extends Fragment {
 
     private FragmentNotificationsBinding binding;
 
-    private TextClock textClock;
-
     private NumberPicker choose;
 
-    private int timer;
+    private int timer; //pitää numberpicker valuen paikallaan
 
-    private int timer2;
+    private int timer2; //ottaa alkp. valuen timeristä ja käyttää ja muokkaa tätä ajastimessa
 
     private Ringtone defRingtone;
     private CountDownTimer countDownTimer;
     private TextView counter;
-
     private MaterialButtonToggleGroup materialButtonToggleGroup;
 
     private String[] choosevals;
@@ -49,13 +45,6 @@ public class NotificationsFragment extends Fragment {
 
         binding = FragmentNotificationsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-
-        //final TextView textView = binding.textNotifications;
-        //notificationsViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
-        // on below line we are initializing our variables.
-
-        //textClock = root.findViewById(R.id.clock);
-        //textClock.setFormat24Hour("dd.MM.yyyy k:mm");
 
         defRingtone = RingtoneManager.getRingtone(getActivity(), Settings.System.DEFAULT_RINGTONE_URI);
 
@@ -81,29 +70,23 @@ public class NotificationsFragment extends Fragment {
                 Log.e("num1", String.valueOf(i1));
                 timer = i1;
                 Log.e("num2", String.valueOf(timer));
-                //counter.setText(String.valueOf(timer));
                 timer2 = timer;
 
             }
         });
 
         materialButtonToggleGroup.addOnButtonCheckedListener(new MaterialButtonToggleGroup.OnButtonCheckedListener() {
-
             public void onButtonChecked(MaterialButtonToggleGroup group, int checkedId, boolean isChecked) {
                 if (isChecked) {
                     if (checkedId == R.id.start) {
                         Log.e("timer", "start");
                         startTimer();
-                    // start timing here funkiot tänne
                     } else if (checkedId == R.id.pause) {
                         Log.e("timer", "pause");
                         pauseTimer();
-                    // pause timing here
                     } else if (checkedId == R.id.stop) {
                         Log.e("timer", "stop");
-
                         stopTimer();
-                    //stop timing here
                     }
                 }
             }
@@ -115,7 +98,7 @@ public class NotificationsFragment extends Fragment {
 
     public void startTimer(){
         defRingtone.stop();
-        if (countDownTimer != null){
+        if (countDownTimer != null){ //tämä turhaa atm kuului aikaisempaan ratkaisuun, tarkista vielä
             countDownTimer.cancel();
         }
         if (timer2 == 0){
@@ -123,20 +106,19 @@ public class NotificationsFragment extends Fragment {
         }
         Animation animation = AnimationUtils.loadAnimation(getContext(), R.anim.buttonanimation);
         counter.clearAnimation();
-            countDownTimer = new CountDownTimer(timer2 * 1000 + 1000, 1000) {
+        countDownTimer = new CountDownTimer(timer2 * 1000 + 1000, 1000) {
 
-                public void onTick(long millisUntilFinished) {
-                    timer2 = (int) millisUntilFinished / 1000;
-                    counter.setText(String.valueOf(millisUntilFinished / 1000));
-                }
+            public void onTick(long millisUntilFinished) {
+                timer2 = (int) millisUntilFinished / 1000;
+                counter.setText(String.valueOf(millisUntilFinished / 1000));
+            }
 
-                public void onFinish() {
-                    counter.setText("TIME!");
-                    counter.startAnimation(animation);
-                    defRingtone.play();
-                }
-            }.start();
-
+            public void onFinish() {
+                counter.setText("TIME!");
+                counter.startAnimation(animation);
+                defRingtone.play();
+            }
+        }.start();
     }
 
     public void pauseTimer(){
@@ -146,10 +128,8 @@ public class NotificationsFragment extends Fragment {
         try {
             countDownTimer.cancel();
             counter.clearAnimation();
-
         }
         catch (Exception e){
-
         }
     }
 
@@ -159,11 +139,7 @@ public class NotificationsFragment extends Fragment {
         timer2 = timer;
         counter.clearAnimation();
         defRingtone.stop();
-
-
     }
-
-
 
     @Override
     public void onDestroyView() {
