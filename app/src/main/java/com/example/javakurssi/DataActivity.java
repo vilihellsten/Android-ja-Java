@@ -7,9 +7,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.ActionBar;
@@ -41,13 +39,13 @@ public class DataActivity extends AppCompatActivity {
     private Toolbar toolbar;
 
     private String searchTerm;
-
+/*
     private JsonObjectRequest jsonObjectRequest;
 
-    private JSONObject responseObject;
+    private JSONObject responseObject;*/
     private String url;
 
-    private ProgressBar progressBar;
+    //private ProgressBar progressBar;
 
     private ArrayList itemList;
 
@@ -56,16 +54,16 @@ public class DataActivity extends AppCompatActivity {
     private RecycleAdapter adapter;
 
     private ProgressBar progress;
-    private ArrayList<ItemDataModel> dataset;
+    //private ArrayList<ItemDataModel> dataset;
 
     private SearchView searchView;
-
+/*
     private LinearLayout linearLayout;
 
     private RecyclerView recycler;
 
     private TextView textview;
-
+*/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,33 +79,12 @@ public class DataActivity extends AppCompatActivity {
 
         });
 
-
-        //linearLayout = (LinearLayout) findViewById(R.id.recycler);
-        recycler = (RecyclerView) findViewById(R.id.recycler);
-
-
-        /*
-        recycler.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(R.id.id == View.GONE )
-                { //ei ole constraintteja helloViewvissä joten muut elementit eivät liiku, gone toimii
-                    id.setVisibility(View.VISIBLE);
-                } else {
-                    helloView.setVisibility(View.GONE);
-                }
-            }
-        });*/
-
-
         toolbar = (Toolbar) findViewById(R.id.data);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
-
         progress = (ProgressBar) findViewById(R.id.progress);
-
 
         Bundle extras = getIntent().getExtras();
         if (extras == null) {
@@ -123,15 +100,12 @@ public class DataActivity extends AppCompatActivity {
             Log.e("applyterm", url);
 
         }
-/*
-        public myOnClickListener(){
 
-        }*/
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                itemList = new ArrayList<ItemDataModel>(); // item open utils kansiossa // itemdatamodel tutoriaalissa
+                itemList = new ArrayList<ItemDataModel>();
                 resultsArray = null;
                 progress.setVisibility(View.VISIBLE);
                 try {
@@ -141,11 +115,6 @@ public class DataActivity extends AppCompatActivity {
                 }
                 for (int i = 0; i < resultsArray.length(); i++) {
                     try {
-
-                        //itemDataModel.setName.dataobj.getstring("name:"name""));
-                        //itemDataModel.name = resultsArray.getString()
-                        //Log.e("string",resultsArray.getString(i));
-
 
                         JSONObject firstObject = resultsArray.getJSONObject(i);
                         String name = firstObject.getString("name");
@@ -194,7 +163,6 @@ public class DataActivity extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.recycler);
         recyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
-        Log.e("itemlist", "täällä");
         if (itemList != null) {
             adapter = new RecycleAdapter(itemList);
             recyclerView.setLayoutManager(layoutManager);
@@ -204,12 +172,6 @@ public class DataActivity extends AppCompatActivity {
         }
     }
 
-/*
-override fun onCreateOptionsMenu(menu: Menu): Boolean {
-    menuInflater.inflate(R.menu.options_menu, menu)
-
-    return true
-}*/
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

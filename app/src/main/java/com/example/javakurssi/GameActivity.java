@@ -15,17 +15,14 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-import androidx.datastore.preferences.core.MutablePreferences;
 import androidx.datastore.preferences.core.Preferences;
-import androidx.datastore.preferences.core.PreferencesKeys;
 import androidx.datastore.preferences.rxjava2.RxPreferenceDataStoreBuilder;
 import androidx.datastore.rxjava2.RxDataStore;
+
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.Random;
-
-import io.reactivex.Single;
 
 
 public class GameActivity extends AppCompatActivity {
@@ -37,7 +34,7 @@ public class GameActivity extends AppCompatActivity {
     private static final String KEY_HS = "HighestScore";
 
     private static final String TAG = "GameActivity";
-    // github skzeeshan365 reiserx // src main java com data store ja datastore helper
+
     private ImageButton button;
     private ImageButton button2;
     private ImageButton button3;
@@ -45,16 +42,24 @@ public class GameActivity extends AppCompatActivity {
     private int flip;
     private TextView textView;
     private TextView textView1;
+    private TextView textView2;
 
     private int counter;
     private Preferences pref_error;
 
     private Toolbar toolbar;
-    private int highestSuccessCount = 0;
+    private int highestSuccessCount;
+
+    private String hsString ="asd";
+    private String hs2String = "dfg";
+    private int testString = 0;
+    private int hsInt= 0;
+    DataStoreHelper dataStoreHelper;
+
+    DataStoreSingleton dataStoreSingleton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        dataStoreRX = new RxPreferenceDataStoreBuilder(this, "name_for_datastore").build();
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_game);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
@@ -63,14 +68,23 @@ public class GameActivity extends AppCompatActivity {
 
             return insets;
 
-
         });
+
+
+        dataStoreSingleton = DataStoreSingleton.getInstance();
+        if (dataStoreSingleton.getDataStore() == null) {
+            dataStoreRX = new RxPreferenceDataStoreBuilder(this, "data").build();
+        } else {
+            dataStoreRX = dataStoreSingleton.getDataStore();
+        }
+        dataStoreSingleton.setDataStore(dataStoreRX);
+
+        dataStoreHelper = new DataStoreHelper(this, dataStoreRX);
 
         toolbar = (Toolbar) findViewById(R.id.gameToolbar);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
-
 
         /*
         tämä oli uudessa luookassa
@@ -149,24 +163,6 @@ public class GameActivity extends AppCompatActivity {
         });
 
     }
-    public boolean putStringValue(String Key, String value){ // TEE OMAT JAVAKLASSIT
-        boolean returnvalue;
-        Preferences.Key<String> PREF_KEY = PreferencesKeys.stringKey(Key);
-        Single<Preferences> updateResult =  dataStoreRX.updateDataAsync(prefsIn -> {
-            MutablePreferences mutablePreferences = prefsIn.toMutablePreferences();
-            mutablePreferences.set(PREF_KEY, value);
-            return Single.just(mutablePreferences);
-        }).onErrorReturnItem(null);
-
-        returnvalue = updateResult.blockingGet() != pref_error;
-        return returnvalue;
-    }
-
-    String getStringValue(String Key) {
-        Preferences.Key<String> PREF_KEY = PreferencesKeys.stringKey(Key);
-        Single<String> value = dataStoreRX.data().firstOrError().map(prefs -> prefs.get(PREF_KEY)).onErrorReturnItem("null");
-        return value.blockingGet();
-    }
 
     public void clearAnimations() {
         button.clearAnimation();
@@ -186,22 +182,46 @@ public class GameActivity extends AppCompatActivity {
         if (counter == 1) {
             highestSuccessCount += 4;
             textView.setText(String.valueOf("Guess highscore " + highestSuccessCount));
+            hs2String = String.valueOf(highestSuccessCount);
 
+            dataStoreHelper.putStringValue(KEY_HS, String.valueOf(hs2String));
+            //dataStoreHelper.saveValue(KEY_HS, String.valueOf(hs2String));
+           //putStringValue(KEY_HS, hs2String);
+            hsString = dataStoreHelper.getStringValue(KEY_HS);
+            Log.e("testi",hsString);
         }
         if (counter == 2) {
             highestSuccessCount += 3;
             textView.setText(String.valueOf("Guess highscore " + highestSuccessCount));
+            hs2String = String.valueOf(highestSuccessCount);
 
+            dataStoreHelper.putStringValue(KEY_HS, String.valueOf(hs2String));
+            //putStringValue(KEY_HS, hs2String);
+            //dataStoreHelper.saveValue(KEY_HS, String.valueOf(hs2String));
+            hsString = dataStoreHelper.getStringValue(KEY_HS);
+            Log.e("testi",hsString);
         }
         if (counter == 3) {
             highestSuccessCount += 2;
             textView.setText(String.valueOf("Guess highscore " + highestSuccessCount));
+            hs2String = String.valueOf(highestSuccessCount);
 
+            dataStoreHelper.putStringValue(KEY_HS, String.valueOf(hs2String));
+            //putStringValue(KEY_HS, hs2String);
+            //dataStoreHelper.saveValue(KEY_HS, String.valueOf(hs2String));
+            hsString = dataStoreHelper.getStringValue(KEY_HS);
+            Log.e("testi",hsString);
         }
         if (counter == 4) {
             highestSuccessCount += 1;
             textView.setText(String.valueOf("Guess highscore " + highestSuccessCount));
+            hs2String = String.valueOf(highestSuccessCount);
 
+            dataStoreHelper.putStringValue(KEY_HS, String.valueOf(hs2String));
+            //putStringValue(KEY_HS, hs2String);
+            //dataStoreHelper.saveValue(KEY_HS, String.valueOf(hs2String));
+            hsString = dataStoreHelper.getStringValue(KEY_HS);
+            Log.e("testi",hsString);
         }
     }
 

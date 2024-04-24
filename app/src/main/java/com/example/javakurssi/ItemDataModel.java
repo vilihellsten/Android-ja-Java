@@ -17,7 +17,6 @@ public class ItemDataModel {
         return name;
     }
 
-
     public String getId() {
         return id;
     }

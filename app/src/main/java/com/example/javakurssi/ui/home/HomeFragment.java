@@ -17,6 +17,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.javakurssi.DataActivity;
 import com.example.javakurssi.GameActivity;
 import com.example.javakurssi.R;
+import com.example.javakurssi.Valuuttamuunnin;
 import com.example.javakurssi.databinding.FragmentHomeBinding;
 
 public class HomeFragment extends Fragment {
@@ -27,6 +28,7 @@ public class HomeFragment extends Fragment {
     private Button startButton;
     private TextView helloView;
 
+    private Button muunnin;
     private EditText search;
 
     private Button searchButton;
@@ -65,6 +67,15 @@ public class HomeFragment extends Fragment {
         });
 
         search = (EditText) root.findViewById(R.id.search);
+
+        muunnin = (Button) root.findViewById(R.id.muunnin);
+
+        muunnin.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                handleOnClickEvents(v);
+            }
+        });
+
         return root;
     }
 
@@ -78,7 +89,7 @@ public class HomeFragment extends Fragment {
         //if else kokeile?
         switch(v.getId()){
             case R.id.helloButton:
-                Log.d(TAG, "User tapped the Hello button");
+                Log.i(TAG, "User tapped the Hello button");
                 if(helloView.getVisibility() == View.GONE )
                 {
                     helloView.setVisibility(View.VISIBLE);
@@ -87,16 +98,20 @@ public class HomeFragment extends Fragment {
                 }
                 break;
             case R.id.startButton:
-                Log.d(TAG, "User tapped the Start Game button");
+                Log.i(TAG, "User tapped the Start Game button");
                 startActivity(new Intent(getActivity(), GameActivity.class));
                 break;
             case R.id.searchButton:
-                Log.d(TAG, "User tapped the search button");
+                Log.i(TAG, "User tapped the search button");
                 Intent i = new Intent(getActivity(), DataActivity.class);
                 String value = search.getText().toString();
                 Log.e("search",value);
                 i.putExtra("search", value);
                 startActivity(i);
+                break;
+            case R.id.muunnin:
+                Log.i(TAG, "User tapped the Start Game button");
+                startActivity(new Intent(getActivity(), Valuuttamuunnin.class));
                 break;
         }
     }

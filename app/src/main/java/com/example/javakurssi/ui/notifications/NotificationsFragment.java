@@ -144,6 +144,7 @@ public class NotificationsFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        defRingtone.stop();
         binding = null;
     }
 

@@ -18,9 +18,13 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".Valuuttamuunnin"
+            android:exported="false"
+            android:parentActivityName=".MainActivity3"/>
+        <activity
             android:name=".DataActivity"
             android:exported="false"
-            android:parentActivityName=".MainActivity3" /> />
+            android:parentActivityName=".MainActivity3" />
 
         <receiver
             android:name=".AirplanemodeReceiver"

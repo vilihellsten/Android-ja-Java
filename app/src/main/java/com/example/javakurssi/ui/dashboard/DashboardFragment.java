@@ -64,10 +64,16 @@ public class DashboardFragment extends Fragment implements LocationListener {
             // for ActivityCompat#requestPermissions for more details.
             return root;
         }
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 10000, 0, this);
-        lastLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+
+        try{
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 3000, 0, this);
+        lastLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);}
+        catch (Exception e){
+            Log.e("error", e.getMessage());
+        }
 
         addressUpdate();
+
 
         locationButton = (Button) root.findViewById(R.id.locationbutton);
 
@@ -84,7 +90,6 @@ public class DashboardFragment extends Fragment implements LocationListener {
         locationButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 handleOnClickEvents(v);
-
                 Log.d("TAG", "User tapped the location button");
             }
         });
@@ -109,7 +114,6 @@ public class DashboardFragment extends Fragment implements LocationListener {
                 if (mapIntent.resolveActivity(getContext().getPackageManager()) != null){
                     startActivity(mapIntent);
                 }
-
                 break;
         }
     }
@@ -125,6 +129,7 @@ public class DashboardFragment extends Fragment implements LocationListener {
     public void onLocationChanged(@NonNull Location location) {
         lastLocation = location;
         addressUpdate();
+
         Log.d("TAG", String.valueOf(location));
         Log.d("TAG", String.valueOf(location.getLongitude()));
         Log.d("TAG",String.valueOf(location.getLatitude()));
@@ -137,6 +142,7 @@ public class DashboardFragment extends Fragment implements LocationListener {
     }
 
     public void addressUpdate(){
+
         try{
             Geocoder geocoder = new Geocoder(getContext(), Locale.getDefault());
             List<Address> addresses = geocoder.getFromLocation(
@@ -149,5 +155,16 @@ public class DashboardFragment extends Fragment implements LocationListener {
             Log.e("error", e.getMessage());
         }
     }
-
 }
+
+/*
+    private String getAddress(Location location){
+        currentLocation = "Address not available";
+        try{
+            addressUpdate();
+        } catch (Exception e){
+            Log.e("getlocation", e.getMessage());
+        }
+        return currentLocation;
+    }*/
+
