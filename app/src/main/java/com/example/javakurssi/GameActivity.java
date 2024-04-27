@@ -1,5 +1,7 @@
 package com.example.javakurssi;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -16,9 +18,9 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.datastore.preferences.core.Preferences;
+import androidx.datastore.preferences.core.PreferencesKeys;
 import androidx.datastore.preferences.rxjava2.RxPreferenceDataStoreBuilder;
 import androidx.datastore.rxjava2.RxDataStore;
-
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -31,8 +33,9 @@ public class GameActivity extends AppCompatActivity {
     Random rand = new Random();
     int random = rand.nextInt(4);
 
-    private static final String KEY_HS = "HighestScore";
+    private static final String KEY_HSS = "HighestScore";
 
+    public static final Preferences.Key<Integer> KEY_HS = PreferencesKeys.intKey("highest_score");
     private static final String TAG = "GameActivity";
 
     private ImageButton button;
@@ -55,6 +58,7 @@ public class GameActivity extends AppCompatActivity {
     private int testString = 0;
     private int hsInt= 0;
     DataStoreHelper dataStoreHelper;
+
 
     DataStoreSingleton dataStoreSingleton;
     @Override
@@ -86,31 +90,8 @@ public class GameActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
-        /*
-        tämä oli uudessa luookassa
-        public DataStoreHelper(){ this.dataStoreRX ? DataStore.getInstance().getDataStore();}
-
-        DataStoreSingleton dataStoreSingleton = DataStoreSingleton.getInstance();
-        if (dataStoreSingleton.getDataStore() == null) {
-            dataStoreRX = new RxPreferenceDataStoreBuilder(this, TAG_STORE_NAME).build();
-        } else {
-            dataStoreRX = dataStoreSingleton.getDataStore();
-        }
-        dataStoreSingleton.setDataStore(dataStoreRX);
-        dataStoreHelper = new DataStoreHelper();
-
-        ylös vielä RX?
-        kokeile ilman classia
-
-        tällä muistiin
-        dataStoreHelper.putStringValue(KEY_HS, STring.valueOf(asdasd)
-
-        haku
-        String asdasd = dataStoreHelper.getStringValue(KEY_HS; def "0"
-
-        string intiks
-        asdasd = Integer.valueOf(asdasd)
-        */
+        SharedPreferences sharedPref = getSharedPreferences("myPreferences", Context.MODE_PRIVATE);
+        highestSuccessCount = sharedPref.getInt("highestSuccessCount", 0);
 
         flip = 1;
         textView = (TextView) findViewById(R.id.Highscore);
@@ -150,7 +131,7 @@ public class GameActivity extends AppCompatActivity {
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
-            @Override // Reset game on clicking floating action button
+            @Override // Reset game when clicking floating action button
             public void onClick(View view) {
                 clearAnimations();
                 Log.d(TAG, String.valueOf(random));
@@ -163,6 +144,7 @@ public class GameActivity extends AppCompatActivity {
         });
 
     }
+
 
     public void clearAnimations() {
         button.clearAnimation();
@@ -182,49 +164,31 @@ public class GameActivity extends AppCompatActivity {
         if (counter == 1) {
             highestSuccessCount += 4;
             textView.setText(String.valueOf("Guess highscore " + highestSuccessCount));
-            hs2String = String.valueOf(highestSuccessCount);
 
-            dataStoreHelper.putStringValue(KEY_HS, String.valueOf(hs2String));
-            //dataStoreHelper.saveValue(KEY_HS, String.valueOf(hs2String));
-           //putStringValue(KEY_HS, hs2String);
-            hsString = dataStoreHelper.getStringValue(KEY_HS);
-            Log.e("testi",hsString);
+            saveHighestSuccessCount(highestSuccessCount);
         }
         if (counter == 2) {
             highestSuccessCount += 3;
             textView.setText(String.valueOf("Guess highscore " + highestSuccessCount));
             hs2String = String.valueOf(highestSuccessCount);
 
-            dataStoreHelper.putStringValue(KEY_HS, String.valueOf(hs2String));
-            //putStringValue(KEY_HS, hs2String);
-            //dataStoreHelper.saveValue(KEY_HS, String.valueOf(hs2String));
-            hsString = dataStoreHelper.getStringValue(KEY_HS);
-            Log.e("testi",hsString);
+            saveHighestSuccessCount(highestSuccessCount);
         }
         if (counter == 3) {
             highestSuccessCount += 2;
             textView.setText(String.valueOf("Guess highscore " + highestSuccessCount));
             hs2String = String.valueOf(highestSuccessCount);
 
-            dataStoreHelper.putStringValue(KEY_HS, String.valueOf(hs2String));
-            //putStringValue(KEY_HS, hs2String);
-            //dataStoreHelper.saveValue(KEY_HS, String.valueOf(hs2String));
-            hsString = dataStoreHelper.getStringValue(KEY_HS);
-            Log.e("testi",hsString);
+            saveHighestSuccessCount(highestSuccessCount);
         }
         if (counter == 4) {
             highestSuccessCount += 1;
             textView.setText(String.valueOf("Guess highscore " + highestSuccessCount));
             hs2String = String.valueOf(highestSuccessCount);
 
-            dataStoreHelper.putStringValue(KEY_HS, String.valueOf(hs2String));
-            //putStringValue(KEY_HS, hs2String);
-            //dataStoreHelper.saveValue(KEY_HS, String.valueOf(hs2String));
-            hsString = dataStoreHelper.getStringValue(KEY_HS);
-            Log.e("testi",hsString);
+            saveHighestSuccessCount(highestSuccessCount);
         }
     }
-
 
     public void handleOnClickEvents(View v) {
         Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.buttonanimation);
@@ -286,7 +250,12 @@ public class GameActivity extends AppCompatActivity {
             }
         }
     }
-
+    private void saveHighestSuccessCount(int highestSuccessCount) {
+        SharedPreferences sharedPref = getSharedPreferences("myPreferences", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putInt("highestSuccessCount", highestSuccessCount);
+        editor.apply();
+    }
 
 
 }
