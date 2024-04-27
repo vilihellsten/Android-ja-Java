@@ -35,13 +35,6 @@ public class MainActivity3 extends AppCompatActivity {
         //ehkä alempi myös kommentteihin
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_bottom);
 
-        // jos ei lisätkää toimi alemmat rivit
-        //NavHostFragment navHostFramgent = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment_activity_bottom);
-        //NavController navController = navHostFragment.getNavController();
-
-        //tämä rikkoo
-        //NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration); tämä rikkoo
-
         NavigationUI.setupWithNavController(binding.navView, navController);
         apmBr = new AirplanemodeReceiver();
     }

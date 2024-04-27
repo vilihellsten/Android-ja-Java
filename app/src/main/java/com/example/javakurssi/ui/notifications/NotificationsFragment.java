@@ -65,7 +65,7 @@ public class NotificationsFragment extends Fragment {
         choose.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
             @Override
             public void onValueChange(NumberPicker numberPicker, int i, int i1) {
-                // Code here executes on main thread after user selects value
+
                 Log.e("num1", String.valueOf(i));
                 Log.e("num1", String.valueOf(i1));
                 timer = i1;
