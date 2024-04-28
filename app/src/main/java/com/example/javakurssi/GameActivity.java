@@ -53,10 +53,6 @@ public class GameActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private int highestSuccessCount;
 
-    private String hsString ="asd";
-    private String hs2String = "dfg";
-    private int testString = 0;
-    private int hsInt= 0;
     DataStoreHelper dataStoreHelper;
 
 
@@ -95,10 +91,11 @@ public class GameActivity extends AppCompatActivity {
 
         flip = 1;
         textView = (TextView) findViewById(R.id.Highscore);
-        textView.setText(String.valueOf("Guess highscore " + highestSuccessCount));
+        textView.setText(String.valueOf("Guess highscore: " + highestSuccessCount));
 
         textView1 = (TextView) findViewById(R.id.textView3);
 
+        textView1.setText(String.valueOf("Guesses " + counter));
         button = (ImageButton) findViewById(R.id.button);
         button2 = (ImageButton) findViewById(R.id.button2);
         button3 = (ImageButton) findViewById(R.id.button3);
@@ -138,7 +135,7 @@ public class GameActivity extends AppCompatActivity {
                 random = rand.nextInt(4);
                 resetPictures();
                 counter = 0;
-                textView1.setText(String.valueOf(counter));
+                textView1.setText(String.valueOf("Guesses " + counter));
                 flip = 1;
             }
         });
@@ -163,28 +160,28 @@ public class GameActivity extends AppCompatActivity {
     public void calculateHighscore() {
         if (counter == 1) {
             highestSuccessCount += 4;
-            textView.setText(String.valueOf("Guess highscore " + highestSuccessCount));
+            textView.setText(String.valueOf("Guess highscore: " + highestSuccessCount));
 
             saveHighestSuccessCount(highestSuccessCount);
         }
         if (counter == 2) {
             highestSuccessCount += 3;
-            textView.setText(String.valueOf("Guess highscore " + highestSuccessCount));
-            hs2String = String.valueOf(highestSuccessCount);
+            textView.setText(String.valueOf("Guess highscore: " + highestSuccessCount));
+
 
             saveHighestSuccessCount(highestSuccessCount);
         }
         if (counter == 3) {
             highestSuccessCount += 2;
-            textView.setText(String.valueOf("Guess highscore " + highestSuccessCount));
-            hs2String = String.valueOf(highestSuccessCount);
+            textView.setText(String.valueOf("Guess highscore: " + highestSuccessCount));
+
 
             saveHighestSuccessCount(highestSuccessCount);
         }
         if (counter == 4) {
             highestSuccessCount += 1;
-            textView.setText(String.valueOf("Guess highscore " + highestSuccessCount));
-            hs2String = String.valueOf(highestSuccessCount);
+            textView.setText(String.valueOf("Guess highscore: " + highestSuccessCount));
+
 
             saveHighestSuccessCount(highestSuccessCount);
         }
@@ -199,7 +196,7 @@ public class GameActivity extends AppCompatActivity {
                 case R.id.button:
                     if (counter < 4) {
                         counter = counter + 1;
-                        textView1.setText(String.valueOf(counter));
+                        textView1.setText(String.valueOf("Guesses " + counter));
                     }
                     button.startAnimation(animation);
                     if (random == 0) {
@@ -212,7 +209,7 @@ public class GameActivity extends AppCompatActivity {
                 case R.id.button2:
                     if (counter < 4) {
                         counter = counter + 1;
-                        textView1.setText(String.valueOf(counter));
+                        textView1.setText(String.valueOf("Guesses " + counter));
                     }
                     button2.startAnimation(animation);
                     if (random == 1) {
@@ -225,7 +222,7 @@ public class GameActivity extends AppCompatActivity {
                 case R.id.button3:
                     if (counter < 4) {
                         counter = counter + 1;
-                        textView1.setText(String.valueOf(counter));
+                        textView1.setText(String.valueOf("Guesses " + counter));
                     }
                     button3.startAnimation(animation);
                     if (random == 2) {
@@ -238,7 +235,7 @@ public class GameActivity extends AppCompatActivity {
                 case R.id.button4:
                     if (counter < 4) {
                         counter = counter + 1;
-                        textView1.setText(String.valueOf(counter));
+                        textView1.setText(String.valueOf("Guesses " + counter));
                     }
                     button4.startAnimation(animation);
                     if (random == 3) {
