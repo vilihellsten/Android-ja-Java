@@ -1,1 +1,3 @@
-LAB-AMK Javakurssin tehtävät ja tentti
+# Android/ Javaohjelmointia
+
+Android sovellus joka sisältää aloitusnäkymän, pelin, valuuttamuuntimen ja Google Maps paikantimen
