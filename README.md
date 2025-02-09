@@ -1,3 +1,3 @@
 # Android/ Javaohjelmointia
 
-Android sovellus joka sisältää aloitusnäkymän, pelin, valuuttamuuntimen ja Google Maps paikantimen
+Simppeli androidsovellus joka sisältää muunmuassa pelin, valuuttamuuntimen ja Google Maps paikantimen
